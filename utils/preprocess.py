@@ -1,9 +1,10 @@
 import re
 
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-
-stop_words = set(stopwords.words('english'))
+stop_words = {
+    "the", "is", "in", "and", "to",
+    "of", "a", "for", "on", "with",
+    "as", "by", "an", "at"
+}
 
 def clean_text(text):
 
@@ -11,12 +12,14 @@ def clean_text(text):
 
     text = re.sub(r'[^a-zA-Z ]', '', text)
 
-    words = word_tokenize(text)
+    words = text.split()
 
     filtered_words = []
 
     for word in words:
+
         if word not in stop_words:
+
             filtered_words.append(word)
 
     return " ".join(filtered_words)
